@@ -1,0 +1,362 @@
+\documentclass[compress]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{url}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{arrows}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\parskip=15pt
+
+\title{Introdução ao Processamento de Linguagem Natural e a Recuperação de Informação}
+\author{Alexandre Rademaker}
+\institute[EMAp, FGV]{Escola de Matemática Aplicada, Fundação Getúlio Vargas}
+\date
+
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Introdução}
+
+\begin{frame}{Definições}
+  
+  \url{https://en.wikipedia.org/wiki/Information_retrieval}
+
+  \url{https://en.wikipedia.org/wiki/Natural_language_processing}
+  (vejam ``see also'')
+
+  \url{https://encyclopediaofmath.org/wiki/Mathematical_linguistics}
+  
+\end{frame}
+
+\subsection{Why NLP is Hard?}
+
+\begin{frame}{Querying a knowledge base}
+
+{\bf User query} Has my order number 4291 been shipped yet?
+
+{\bf Database}:
+\begin{tabbing}
+ORDER\\ 
+Order number \hspace{0.5in} \=Date ordered \hspace{0.5in} \=Date shipped\\[0.05in]
+4290              \>2/2/13           \>2/2/13\\
+4291              \>2/2/13           \>2/2/13\\
+4292              \>2/2/13             
+\end{tabbing}
+{\bf USER:} Has my order number 4291 been shipped yet?\\
+{\bf DB QUERY:} order(number=4291,date\_shipped=?)\\
+{\bf RESPONSE:} Order number 4291 was shipped on 2/2/13
+\end{frame} 
+
+\begin{frame}{Why is this difficult?}
+
+Similar strings mean different things, different strings mean the same
+thing:
+\begin{enumerate}[<+->]
+\item How fast is the TZ?
+\item How fast will my TZ arrive?
+\item Please tell me when I can expect the TZ I ordered.
+\end{enumerate}
+Ambiguity:
+\begin{itemize}[<+->]
+\item Do you sell Sony laptops and disk drives?
+\item Do you sell (Sony (laptops and disk drives))?
+\item Do you sell (Sony laptops) and disk drives)?
+\end{itemize}
+\end{frame} 
+
+
+\begin{frame}{Wouldn't it be better if \ldots?}
+
+The properties which make natural language difficult to process are essential
+to human communication:
+\begin{itemize}
+\item Flexible 
+\item Learnable but compact 
+\item Emergent, evolving systems
+\end{itemize}
+Synonymy and ambiguity go along with these properties.
+\pause
+Natural language communication can be indefinitely precise:
+\begin{itemize}
+\item Ambiguity is mostly local (for humans)
+\item Semi-formal additions and conventions for different genres
+\end{itemize}
+\end{frame} 
+
+
+\begin{frame}{Reflections}
+
+  \url{https://xkcd.com/191/}
+
+  \url{https://www.imdb.com/title/tt2543164/?ref_=fn_al_tt_1}
+
+  \url{https://twitter.com/emilymbender/status/1527039334645280768}
+
+  \url{https://youtu.be/8rXD5-xhemo?t=845} language is an increadible
+  new device for humans!
+
+\end{frame}
+
+\subsection{Scope of NLP}
+
+\begin{frame}{Some NLP applications} 
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+      \begin{itemize}
+      \item spelling and grammar checking
+      \item predictive text
+      \item optical character recognition (OCR)
+      \item screen readers 
+      \item augmentative and alternative communication
+      \item machine aided translation 
+      \end{itemize}
+    \end{column}
+    
+    \begin{column}{.5\textwidth}
+      \begin{itemize}
+      \item lexicographers' tools 
+      \item information retrieval
+      \item document classification 
+      \item document clustering
+      \item information extraction
+      \item sentiment classification
+      \item text mining
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame} 
+
+\begin{frame}{More NLP applications \ldots} 
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+      \begin{itemize}
+      \item question answering
+      \item summarization
+      \item text segmentation
+      \item exam marking
+      \item language teaching
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{.5\textwidth}
+      \begin{itemize}
+      \item report generation
+      \item machine translation
+      \item natural language interfaces to databases
+      \item email understanding
+      \item dialogue systems
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{A sample application: sentiment classification}
+
+\begin{frame}{Opinion mining: what do they think about me?}
+  \begin{itemize}
+  \item Task: scan documents (webpages, tweets etc) for positive and
+    negative opinions on people, products etc.
+  \item Find all references to entity in some document collection:
+    list as positive, negative (possibly with strength) or neutral.
+  \item Construct summary report plus examples (text snippets).
+  \item Fine-grained classification: e.g., for phone, opinions about:
+    design, performance, battery life \ldots
+\end{itemize}
+\end{frame}
+
+\begin{frame}{iPhone 8 review (Guardian 29/9/2017)}
+  \begin{quote} 
+    The iPhone 8 has Apple's latest and best processor. The six-core
+    A11 Bionic has two high-performance cores and four power-efficient
+    cores and is apparently the most powerful so far because it can
+    use a combination of all six at once.
+
+    Performance was excellent, but I struggled to see a real
+    difference in day-to-day speed compared to the iPhone 7. But what
+    I'm very pleased to be able to report is that Apple has finally
+    improved battery life for the 4.7in iPhone.
+
+    We're not talking a two-day battery here, but the iPhone 8 lasted
+    just over 26 hours \ldots
+\end{quote}
+\end{frame}
+
+\begin{frame}{Sentiment classification: the research task}
+  \begin{itemize}
+  \item Full task: information retrieval, cleaning up text structure,
+    named entity recognition, identification of relevant parts of
+    text. Evaluation by humans.
+  \item Research task: preclassified documents, topic known, opinion
+    in text along with some straightforwardly extractable score.
+  \item Movie review \emph{corpus} (Pang et al 2002): strongly
+    positive or negative reviews from IMDb, 50:50 split, with rating
+    score.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Sentiment analysis applications}
+
+  \url{https://www.imdb.com}
+
+  \url{https://www.amazon.com}
+
+  \url{https://www.google.com/maps}
+
+\end{frame}
+
+
+\begin{frame}{Bag of words technique}
+  \begin{itemize}
+  \item Treat the reviews as collections of individual words.
+  \item Classify reviews according to positive or negative words.
+  \item Could use word lists prepared by humans, but machine learning
+    based on a portion of the corpus (\emph{training set}) is
+    preferable.
+  \item Use human rankings for training and evaluation.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Some sources of errors for bag-of-words}
+  \begin{itemize}
+  \item Negation:
+    \begin{quote}
+      Ridley Scott has never directed a bad film.
+    \end{quote}
+  \item Overfitting the training data: e.g., if training set includes
+    a lot of films from before 2005, {\it Ridley} may be a strong
+    positive indicator, but then we test on reviews for `Kingdom of
+    Heaven'?
+  \item Comparisons and contrasts.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Contrasts in the discourse}
+\begin{quote}
+  This film should be brilliant. It sounds like a great plot, the
+  actors are first grade, and the supporting cast is good as well, and
+  Stallone is attempting to deliver a good performance.  However, it
+  can't hold up.
+\end{quote}
+\end{frame}
+
+
+\begin{frame}{Doing sentiment classification `properly'?}
+  \begin{itemize}
+  \item Morphology, syntax and compositional semantics:\\
+    who is talking about what, what terms are associated with what,
+    tense \ldots
+  \item Lexical semantics:\\ are words positive or negative
+    \alert{in this context}?  Word senses (e.g., {\it spirit})?\\
+  \item Pragmatics and discourse structure:\\
+    what is the topic of this section of text?  Pronouns and definite
+    references.
+  \item Getting all this to work well on arbitrary text is very hard.
+  \item Ultimately the problem is \emph{AI-complete}, but can we do
+    well enough for NLP to be useful?
+\end{itemize}
+\end{frame}
+
+
+\subsection{More NLP applications}
+
+\begin{frame}{IR, IE and QA}
+  \begin{itemize}
+  \item Information retrieval: return documents in response to a user
+    query (Internet Search is a special case)
+  \item Information extraction: discover specific information from a
+    set of documents (e.g. company joint ventures)
+  \item Question answering: answer a specific user question by
+    returning a section of a document:
+    \begin{quote}
+      What is the capital of France? Paris has been the French
+      capital for many centuries.
+    \end{quote}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{MT}
+  \begin{itemize}
+  \item Earliest attempted NLP application.
+  \item High quality only if the \emph{domain} is restricted (or
+    with very close languages: e.g., Swedish-Danish).
+  \item Utility greatly increased in 1990s with increase in
+    availability of electronic text.
+  \item Good applications for bad MT \ldots
+  \item Spoken language translation is viable for limited domains.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Natural language interfaces and dialogue systems}
+
+  All rely on a limited domain:
+  \begin{itemize}
+  \item LUNAR: classic example of a natural language interface to a
+    database (NLID): 1970--1975
+  \item SHRDLU: (text-based) dialogue system: 1973
+  \item Current spoken dialogue systems
+  \end{itemize}
+
+  Limited domain allows disambiguation: e.g., in LUNAR, {\it rock} had
+  one sense.
+\end{frame}
+
+\subsection{NLP subtasks}
+
+\begin{frame}{NLP subtasks}
+  \begin{itemize}
+  \item input preprocessing: speech recognizer, text preprocessor or
+    gesture recognizer.
+  \item morphological analysis
+  \item part of speech tagging 
+  \item parsing: this includes syntax and compositional semantics
+  \item disambiguation, inference 
+  \item context processing 
+  \item discourse structuring
+  \item realization 
+  \item morphological generation
+  \item output processing: text-to-speech, text formatter, etc.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Subtasks in natural language interface to a knowledge base}
+
+  \url{https://arxiv.org/pdf/2012.01707.pdf}
+
+\end{frame}
+
+
+\begin{frame}{General comments}
+  \begin{itemize}
+  \item Even `simple' applications might need complex knowledge
+    sources.
+  \item Applications cannot be $100\%$ perfect.
+  \item Applications that are $< 100\%$ perfect can be useful.
+  \item Aids to humans are easier than replacements for humans.
+  \item NLP interfaces compete with non-language approaches.
+  \item Typically: shallow processing on arbitrary input or deep
+    processing on narrow domains.
+  \item Limited domain systems require expensive expertise to port or
+    large amounts of (expensive) data.
+  \item External influences on NLP are very important.
+  \end{itemize}
+\end{frame}
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

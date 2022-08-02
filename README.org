@@ -1,20 +1,15 @@
 #+title: Introdução ao Processamento de Linguagem Natural
 #+author: Alexandre Rademaker
 
-
 * Info
   
-- Monitoria: Sexta 14:20 - 16:20 (@yfaria)
-- Forum https://github.com/orgs/emap-nlp/teams/students
-- site https://github.com/emap-nlp
+- Monitoria: Sexta 14:20 - 16:20 (@wellington36)
+- Forum https://github.com/orgs/emap-nlp-2022/discussions
+- https://github.com/emap-nlp-2022/syllabus
 
-* aula 1 <2021-08-02 Mon>
+* aula 1 <2022-08-02 Tue>
 
-  - https://www.cl.cam.ac.uk/teaching/1920/NLP/slides/slides1.pdf
-  - https://youtu.be/8rXD5-xhemo?t=845 language is an increadible new
-    device for humans!
-  - matemática e linguistica
-    https://encyclopediaofmath.org/wiki/Mathematical_linguistics
+  - file:aula-01.pdf
 
 * aula 2 <2021-08-04 Wed>
 
@@ -86,7 +81,6 @@
   - outra biblioteca de NLP com bom suporte Português - afinal eu
     contribui com isso! ;-) -
     https://freeling-user-manual.readthedocs.io/en/latest/
-
 
   Nossa Senhora do Carmo vs Igreja do Carmo... https://pt.wikipedia.org/wiki/Nossa_Senhora_do_Carmo
 
