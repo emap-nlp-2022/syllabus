@@ -10,6 +10,8 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 
+\definecolor{links}{HTML}{2372CC}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
 \parskip=15pt
 
 \title{Introdução ao Processamento de Linguagem Natural e a Recuperação de Informação}
@@ -71,6 +73,8 @@ Ambiguity:
 \item Do you sell (Sony (laptops and disk drives))?
 \item Do you sell (Sony laptops) and disk drives)?
 \end{itemize}
+
+See \href{https://brenocon.com/watson_special_issue/03\%20Deep\%20parsing.pdf}{Deep Parsing in Watson}
 \end{frame} 
 
 
@@ -285,7 +289,7 @@ Natural language communication can be indefinitely precise:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{MT}
+\begin{frame}{Machine Translation}
   \begin{itemize}
   \item Earliest attempted NLP application.
   \item High quality only if the \emph{domain} is restricted (or
@@ -295,6 +299,8 @@ Natural language communication can be indefinitely precise:
   \item Good applications for bad MT \ldots
   \item Spoken language translation is viable for limited domains.
   \end{itemize}
+
+  See \href{https://translate.google.com/?sl=en\&tl=pt\&text=The\%20doctor\%20attended\%20the\%20conference.\&op=translate}{doctor/nurse} bias in data!
 \end{frame}
 
 
@@ -330,7 +336,7 @@ Natural language communication can be indefinitely precise:
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Subtasks in natural language interface to a knowledge base}
+\begin{frame}{Subtasks in natural language applications}
 
   \url{https://arxiv.org/pdf/2012.01707.pdf}
 
