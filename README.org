@@ -9,7 +9,7 @@
 
 * aula 1 <2022-08-02 Tue>
 
-  - file:aula-01.pdf
+  - [[file:aula-01.pdf]]
 
 * aula 2 <2021-08-04 Wed>
 
