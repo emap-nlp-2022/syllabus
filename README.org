@@ -49,6 +49,7 @@
 * Libraries
 
   - http://www.nltk.org
+  - http://spacy.io
   - https://fomafst.github.io
   - https://radimrehurek.com/gensim/
 
@@ -70,9 +71,10 @@ environment:
   python3 -m venv venv
   source venv/bin/activate
   pip install --upgrade pip
-  pip install nltk
-  python -m pip install -U matplotlib
   pip install jupyterlab
+  pip install nltk
+  pip install spacy
+  pip install -U matplotlib
 #+end_src
 
 Carregar com:
