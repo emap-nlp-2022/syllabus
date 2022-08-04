@@ -3,8 +3,7 @@
 
 * Info
   
-- Monitoria :: ?? (@wellington36)
-- sala :: auditório 308
+- Monitoria :: Quinta-feira 14:00 até 16:00 na 306 (@wellington36).
 - Fórum :: https://github.com/orgs/emap-nlp-2022/discussions
 - website :: https://github.com/emap-nlp-2022/syllabus
 
@@ -13,6 +12,11 @@
   - [[file:aula-01.pdf]]
   - https://youtu.be/ax6Kal18Ki4?t=700
 
+* aula 2 <2022-08-03 Wed>
+
+  - códigos iniciais para processamento de texto
+  - capitulos 1 e 2 do NLTK book
+  
 * aula 2 <2021-08-04 Wed>
 
   - https://www.cl.cam.ac.uk/teaching/1920/NLP/slides/slides2.pdf
