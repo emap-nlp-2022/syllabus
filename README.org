@@ -21,14 +21,14 @@
   
 * Referencias
 
-  - https://web.stanford.edu/~jurafsky/slp3/
   - https://www.nltk.org/book/
-  - https://nlp.stanford.edu/IR-book/ 
+  - https://web.stanford.edu/~jurafsky/slp3/
+  - https://nlp.stanford.edu/IR-book/
+    
   - https://www.morganclaypool.com/doi/abs/10.2200/S00493ED1V01Y201303HLT020
   - https://www.morganclaypool.com/doi/abs/10.2200/S00935ED1V02Y201907HLT043
   - https://press.uchicago.edu/ucp/books/book/distributed/F/bo3613750.html
   - https://staff.fnwi.uva.nl/d.j.n.vaneijck2/cs/
-
   - https://olzama.github.io/CL-seminar/annotated_bib.html
 
 * Courses
@@ -62,8 +62,9 @@ Usando o `venv` criei um venv de Python3 e instalei tudo no mesmo
 environment:
 
 #+begin_src bash
+  mkdir nlp-2022
+  cd nlp-2022
   git clone git@github.com:emap-nlp/syllabus.git
-  cd syllabus
   python3 -m venv venv
   source venv/bin/activate
   pip install --upgrade pip

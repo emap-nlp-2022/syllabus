@@ -1,0 +1,10 @@
+
+We need:
+
+1. spacy
+
+See https://spacy.io/usage   
+
+2. NLTK
+
+: pip install nltk   
