@@ -1,22 +1,24 @@
-#+title: Introdução ao Processamento de Linguagem Natural
+#+title: Introdução ao Processamento de Linguagem Natural e RI
 #+author: Alexandre Rademaker
 
 * Info
   
-- Monitoria: Sexta 14:20 - 16:20 (@wellington36)
-- Forum https://github.com/orgs/emap-nlp-2022/discussions
-- https://github.com/emap-nlp-2022/syllabus
+- Monitoria :: ?? (@wellington36)
+- sala :: auditório 308
+- Fórum :: https://github.com/orgs/emap-nlp-2022/discussions
+- website :: https://github.com/emap-nlp-2022/syllabus
 
 * aula 1 <2022-08-02 Tue>
 
   - [[file:aula-01.pdf]]
+  - https://youtu.be/ax6Kal18Ki4?t=700
 
 * aula 2 <2021-08-04 Wed>
 
   - https://www.cl.cam.ac.uk/teaching/1920/NLP/slides/slides2.pdf
-
   - tutorial FOMA and FST
     http://clt.gu.se/sites/clt.gu.se/files/mkp/clttutorial.pdf
+  - livros? linguagem programação?  horário duvidas?
 
   Outras referências:
 
@@ -183,7 +185,8 @@
 
 * Referencias
 
-  - https://web.stanford.edu/~jurafsky/slp3/ 
+  - https://web.stanford.edu/~jurafsky/slp3/
+  - https://www.nltk.org/book/
   - https://nlp.stanford.edu/IR-book/ 
     
   - https://www.morganclaypool.com/doi/abs/10.2200/S00493ED1V01Y201303HLT020
@@ -200,12 +203,19 @@
   - https://sites.pitt.edu/~naraehan/ling1330/index.html
   - https://bond-lab.github.io/Computational-Lexical-Semantics/
   - https://www.youtube.com/c/INF4820
+  - https://drive.google.com/drive/folders/1QZ-UDOzynMl_llctFRc94knixKy1mddB
+  - https://drive.google.com/drive/folders/1OtF6g3k3i5pLxuvTFNzub6xwd19RzKbJ
   - https://github.com/fccoelho/curso-IRI
       
 * Libraries
 
   - http://www.nltk.org
   - https://fomafst.github.io
+  - https://radimrehurek.com/gensim/
+
+* Data
+
+  - https://github.com/cpdoc/dhbb/
     
     
 * Como usar notebooks
