@@ -16,8 +16,10 @@
 
 * aula 2 <2022-08-03 Wed>
 
-  - capitulos 1 e 2 do NLTK book
+  - capítulos 1 e 2 do NLTK book
+  - básico de Python
   - notebooks no folder file:aula-02/
+  - assignment-00 https://classroom.github.com/a/ucAYaFwm
   
 * Referencias
 
