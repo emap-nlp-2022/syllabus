@@ -5,7 +5,6 @@
 
 \documentclass{beamer}
 
-% \usepackage{../styles/lgcomp}
 \usepackage{graphicx}
 \usepackage{tikz}
 
@@ -18,17 +17,11 @@
 \usepackage{forest,adjustbox}
 \useforestlibrary{linguistics}
 \forestapplylibrarydefaults{linguistics}
-\usepackage{mrs}
-\usepackage{avm}
 
-\title{NLP and IR}
-%\author[Sidebar Name]{First slide name}
+\title{Introdução NLP e IR}
 \author[]{Alexandre Rademaker\thanks{Olga Zamaraeva, University of Washington}}
 \institute{FGV/EMAp}
-
-\subtitle{Formal beginnings\\ Regular expressions and Finite State Automata}
-\date{April 4, 2019}
-%\date{Your semester/date here}
+\subtitle{Regular expressions and Finite State Automata}
 
 \begin{document}
    
@@ -292,17 +285,6 @@ Regular?
   What should the learner acquire?
 
   \vspace{0.2cm}
-  \includegraphics[width=.8\textwidth]{figures/language-hierarchy}
-  \tiny
-  picture from Rawski \& Heinz. Language, vol. 95 no. 1, 2019, pp. e125-e135.
-\end{frame}
-
-
-\begin{frame}{Chomsky hierarchy and learnability}
-
-  What should the learner acquire?
-
-  \vspace{0.2cm}
   \includegraphics[width=.8\textwidth]{figures/fig03b}
   \tiny
   picture from Rawski \& Heinz. Language, vol. 95 no. 1, 2019, pp. e125-e135.
@@ -313,11 +295,10 @@ Regular?
   \begin{itemize}
   \item We will start with regular languages by looking at regular
     expressions as search patterns and FSA for morphology 
-  \item We will continue with context free grammars by looking at
-    probabilistic context free parsing 
+  \item We can continue with context free grammars by looking at
+    probabilistic context free parsing
   \item We can work with a Turing-complete\footnote{We won't really
       use the full power of the complexity.} language formalism (HPSG)
-    in Assignment 5.
   \end{itemize}
 \end{frame}
 
@@ -326,14 +307,12 @@ Regular?
 \begin{frame}
 \frametitle{Regular languages}
 \begin{itemize}
-\item (Right-linear:)
 \item At most one non-terminal on the LHS (left-hand side) and at most one terminal followed by one non-termial on the RHS.
 \item $A \rightarrow xB$ or $ A \rightarrow x $ where x is a terminal and A,B are non-terminals
 \end{itemize}
 
-{\bf a*bc*}
+Language: {\bf a*bc*}
 
-$S \rightarrow aS$
 \hspace{3cm}
 \begin{tikzpicture}[node distance=\dy and \dx,
   >=latex,shorten >=2pt,shorten <=2pt,auto,
@@ -342,34 +321,31 @@ $S \rightarrow aS$
   \newState{S}{$0$}{}{}
   \newState{q1}{$1$}{right=of S}{accepting}
   \newTransition{S}{S}{a}{loop above}
-\newTransition{q1}{q1}{c}{loop above}
-\newTransition{S}{q1}{b}{}
+  \newTransition{q1}{q1}{c}{loop above}
+  \newTransition{S}{q1}{b}{}
   \end{tikzpicture}
 
-
-$S \rightarrow bA$
-
-$A \rightarrow \epsilon$
-
-$A \rightarrow cA$
-
-
+  \begin{align*}
+    S & \rightarrow aS \\
+    S & \rightarrow bA \\
+    A & \rightarrow \epsilon \\
+    A & \rightarrow cA \\
+  \end{align*}
 \end{frame}
 
-\begin{frame}
-\frametitle{Three views of the same object}
-{\it Regular languages can be described by regular expressions or by finite state automata}
-\begin{itemize}
-\item Regular language: a set of strings
-\item Regular expressions compactly describes a regular language
-\item Finite State Automaton (FSA) accepts or generates all the strings from the language (and no other strings)
-\item In this sense, the FSA and the regular expression are ``equivalent'' to each other
-\end{itemize}
+\begin{frame}{Three views of the same object}
 
+  {\it Regular languages can be described by regular expressions or by finite state automata}
+
+  \begin{itemize}
+  \item Regular language: a set of strings
+  \item Regular expressions compactly describes a regular language
+  \item Finite State Automaton (FSA) accepts or generates all the strings from the language (and no other strings)
+  \item In this sense, the FSA and the regular expression are ``equivalent'' to each other
+  \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{**Regular languages: Formal definition}
+\begin{frame}{Regular languages: Formal definition}
 
 Required symbols:
 
@@ -395,16 +371,16 @@ The class of regular languages over $\sum$ is formally defined as:
 
 
 \begin{frame}{The Pumping Lemma (intuition)}
-\begin{itemize}
-\item Why are languages of the form $a^nb^n$ not regular?
-  \begin{itemize}
-  \item aka: why it is not possible to model syntax with FSA?
-  \end{itemize}
-\end{itemize}
+  Why are languages of the form $a^nb^n$ not regular?
+
+  aka: why it is not possible to model syntax with FSA?
+
+  \url{https://en.wikipedia.org/wiki/Pumping_lemma_for_regular_languages}
 \end{frame}
 
 \section{Regular Expressions}
 
+\newcommand{\A}{\texttt{\ensuremath{\,\hat{ }\,}}}
 
 \begin{frame}{Regular expressions: Tools that use them}
   \begin{itemize}
@@ -420,68 +396,62 @@ The class of regular languages over $\sum$ is formally defined as:
   \end{itemize}
 \end{frame}
 
-%\subsection{Syntax of regular expressions}
-\newcommand{\A}{\texttt{\ensuremath{\,\hat{ }\,}}}
 
-\begin{frame}
-\frametitle{The syntax of regular expressions (I)}
+\begin{frame}[allowframebreaks]{The syntax of regular expressions}
 
-Regular expressions consist of
-\begin{itemize}
-\item strings of literal characters: \texttt{c}, \texttt{A100},
-  \texttt{natural language}, \texttt{30 years!}
-\item disjunction:
-\begin{itemize}
-\item ordinary disjunction: \texttt{famil(y|ies)}
-\item character classes: \texttt{[Tt]he}, \texttt{bec[oa]me}
-\item ranges: \texttt{[A-Z]} (any capital letter)
-\end{itemize}
+  Regular expressions consist of
+  
+  \begin{itemize}
+  \item strings of literal characters: \texttt{c}, \texttt{A100},
+    \texttt{natural language}, \texttt{30 years!}
+  \item disjunction:
+    \begin{itemize}
+    \item ordinary disjunction: \texttt{famil(y|ies)}
+    \item character classes: \texttt{[Tt]he}, \texttt{bec[oa]me}
+    \item ranges: \texttt{[A-Z]} (any capital letter)
+    \end{itemize}
+    
+  \item negation: 
+    \mbox{\begin{tabular}[t]{@{}l@{}}
+            \texttt{[{\A}a]} (any symbol but \texttt{a})\\
+            \texttt{[{\A}A-Z0-9]} (not an uppercase letter or number)
+          \end{tabular}}
+  \end{itemize}
 
-\item negation: 
-  \mbox{\begin{tabular}[t]{@{}l@{}}
- \texttt{[{\A}a]} (any symbol but \texttt{a})\\
- \texttt{[{\A}A-Z0-9]} (not an uppercase letter or number)
-  \end{tabular}}
-\end{itemize}
-\end{frame}
+  \framebreak
 
-\begin{frame}
-\frametitle{The syntax of regular expressions (II)}
+  \begin{itemize}
+  \item counters
+    \begin{itemize}
+    \item optionality: \texttt{?}\\
+      \texttt{colou?r}
+    \item any number of occurrences: \texttt{*} (Kleene star)\\
+      \texttt{[0-9]* years}
+    \item at least one  occurrence: \texttt{+}\\
+      \texttt{[0-9]+ dollars}
+    \end{itemize}
+  \item wildcard for any character: .\\
+    \texttt{beg.n} for any character in between \texttt{beg} and \texttt{n} 
+  \end{itemize}
 
-\begin{itemize}
-\item counters
-\begin{itemize}
-\item optionality: \texttt{?}\\
-\texttt{colou?r}
-\item any number of occurrences: \texttt{*} (Kleene star)\\
- \texttt{[0-9]* years}
-\item at least one  occurrence: \texttt{+}\\
- \texttt{[0-9]+ dollars}
-\end{itemize}
-\item wildcard for any character: .\\
-\texttt{beg.n} for any character in between \texttt{beg} and \texttt{n} 
-\end{itemize}
-\end{frame}
+  \framebreak
 
-\begin{frame}
-\frametitle{The syntax of regular expressions (III)}
+  \begin{itemize}
+  \item Escaped characters: to specify a character with a special
+    meaning (\texttt{*}, \texttt{+}, \texttt{?}, \texttt{(}, \texttt{)},
+    \texttt{|}, \texttt{[}, \texttt{]}) it is preceded by a backslash
+    (\texttt{$\backslash$})
+    
+    e.g., a period is expressed as \texttt{$\backslash$.}
 
-\begin{itemize}
-\item Escaped characters: to specify a character with a special
-  meaning (\texttt{*}, \texttt{+}, \texttt{?}, \texttt{(}, \texttt{)},
-  \texttt{|}, \texttt{[}, \texttt{]}) it is preceded by a backslash
-  (\texttt{$\backslash$})
-
-  e.g., a period is expressed as \texttt{$\backslash$.}
-
-\item Operator precedence, from highest to lowest:
-\begin{itemize}
-\item[] parentheses \texttt{()}
-\item[] counters \texttt{* + ?}
-\item[] character sequences
-\item[] disjunction \texttt{|}
-\end{itemize}
-\end{itemize}
+  \item Operator precedence, from highest to lowest:
+    \begin{itemize}
+    \item[] parentheses \texttt{()}
+    \item[] counters \texttt{* + ?}
+    \item[] character sequences
+    \item[] disjunction \texttt{|}
+    \end{itemize}
+  \end{itemize}
 \end{frame}
 
 
@@ -708,7 +678,8 @@ State & a & b & c \\
   \end{center}
 \end{frame}
 
-\begin{frame}{Converting FSA to regex}
+
+\begin{frame}{Converting FSA to RegEx}
 
   E.g.\ The State Removal method
   \begin{itemize}
@@ -724,17 +695,19 @@ State & a & b & c \\
     \item Add $\epsilon$ transitions from old Accepting states to new
     \item Old Accepting states no longer accept
     \end{itemize}
-  \item Now, remove intermediate states one by one, 
-    combining simple inputs on the edges into more complex inputs.
-  \item (Choose the simplest nodes to remove)
-  \item This algorithm is easy to visualize but harder to apply systematically
-  \item Look up e.g.\ {\it transition closure method} if you want systematic
+  \item Now, remove intermediate states one by one, combining simple
+    inputs on the edges into more complex inputs.  (Choose the
+    simplest nodes to remove)
   \end{itemize}
+
+  This algorithm is easy to visualize but harder to apply
+  systematically. Look up e.g.\ {\it transition closure method} if you
+  want systematic.
 \end{frame}
 
-\begin{frame}[t]{The State Removal Method}
-\small
-\begin{center}
+
+\begin{frame}[allowframebreaks]{The State Removal Method}
+  \small
   \begin{tikzpicture}[node distance=\dy and \dx,
     >=latex,shorten >=2pt,shorten <=2pt,auto,
     semithick  %semithick, thick, thin semithick
@@ -760,78 +733,52 @@ State & a & b & c \\
   \vspace{1.5cm}
   
   Getting rid of State 1:
-\end{center}
-\end{frame}
 
-
-\begin{frame}[t]{The State Removal Method}
-\small
-\begin{center}
+  \framebreak
+  
   \begin{tikzpicture}[node distance=\dy and \dx,
     >=latex,shorten >=2pt,shorten <=2pt,auto,
-   semithick  %semithick, thick, thin semithick
-   ]
-   \newState{SS}{$S$}{}{}
-   \newState{S}{$0$}{right=of SS}{}
-   \newState{q1}{$1$}{right=of S}{}
-   \newState{q2}{$2$}{right=of q1}{accepting}
-   \newState{q3}{$3$}{right=of q2}{accepting}
-   \newTransition{SS}{S}{$\epsilon$}{bend left}
-   \newTransition{S}{q1}{a}{bend left}
-   \newTransition{q1}{q2}{b}{bend left}
-   \newTransition{q1}{q1}{a}{loop above}
-   \newTransition{q2}{q3}{b}{bend left}
-   \newTransition{q2}{q3}{c}{below}
-   \newTransition{S}{q3}{b}{below, bend right}
- \end{tikzpicture}
+    semithick  %semithick, thick, thin semithick
+    ]
+    \newState{SS}{$S$}{}{}
+    \newState{S}{$0$}{right=of SS}{}
+    \newState{q1}{$1$}{right=of S}{}
+    \newState{q2}{$2$}{right=of q1}{accepting}
+    \newState{q3}{$3$}{right=of q2}{accepting}
+    \newTransition{SS}{S}{$\epsilon$}{bend left}
+    \newTransition{S}{q1}{a}{bend left}
+    \newTransition{q1}{q2}{b}{bend left}
+    \newTransition{q1}{q1}{a}{loop above}
+    \newTransition{q2}{q3}{b}{bend left}
+    \newTransition{q2}{q3}{c}{below}
+    \newTransition{S}{q3}{b}{below, bend right}
+  \end{tikzpicture}
+ 
+  Getting rid of multiple accepting states:
   
- Getting rid of multiple accepting states:
+  \begin{tikzpicture}[node distance=\dy and \dx,
+    >=latex,shorten >=2pt,shorten <=2pt,auto,
+    semithick  %semithick, thick, thin semithick
+    ]
+    \newState{SS}{$S$}{}{}
+    \newState{S}{$0$}{right=of SS}{}
+    \newState{q1}{$1$}{right=of S}{}
+    \newState{q2}{$2$}{right=of q1}{}
+    \newState{q3}{$3$}{right=of q2}{}
+    \newState{q4}{$4$}{right=of q3}{accepting}
+    \newTransition{SS}{S}{$\epsilon$}{bend left}
+    \newTransition{S}{q1}{a}{bend left}
+    \newTransition{q1}{q2}{b}{bend left}
+    \newTransition{q1}{q1}{a}{loop above}
+    \newTransition{q2}{q3}{b}{bend left}
+    \newTransition{q2}{q3}{c}{below}
+    \newTransition{S}{q3}{b}{below, bend right}
+    \newTransition{q2}{q4}{$\epsilon$}{above, bend left=45}
+    \newTransition{q3}{q4}{$\epsilon$}{bend left}
+  \end{tikzpicture}
   
- \begin{tikzpicture}[node distance=\dy and \dx,
-   >=latex,shorten >=2pt,shorten <=2pt,auto,
-   semithick  %semithick, thick, thin semithick
-   ]
-   \newState{SS}{$S$}{}{}
-   \newState{S}{$0$}{right=of SS}{}
-   \newState{q1}{$1$}{right=of S}{}
-   \newState{q2}{$2$}{right=of q1}{}
-   \newState{q3}{$3$}{right=of q2}{}
-   \newState{q4}{$4$}{right=of q3}{accepting}
-   \newTransition{SS}{S}{$\epsilon$}{bend left}
-   \newTransition{S}{q1}{a}{bend left}
-   \newTransition{q1}{q2}{b}{bend left}
-   \newTransition{q1}{q1}{a}{loop above}
-   \newTransition{q2}{q3}{b}{bend left}
-   \newTransition{q2}{q3}{c}{below}
-   \newTransition{S}{q3}{b}{below, bend right}
-   \newTransition{q2}{q4}{$\epsilon$}{above, bend left=45}
-   \newTransition{q3}{q4}{$\epsilon$}{bend left}
-   \end{tikzpicture}
+  Getting rid of State 1:
    
-   Getting rid of State 1:
-   
-   \begin{tikzpicture}[node distance=\dy and \dx,
-     >=latex,shorten >=2pt,shorten <=2pt,auto,
-     semithick  %semithick, thick, thin semithick
-     ]
-     \newState{SS}{$S$}{}{}
-     \newState{S}{$0$}{right=of SS}{}
-     \newState{q2}{$2$}{right=of S}{}
-     \newState{q3}{$3$}{right=of q2}{}
-     \newState{q4}{$4$}{right=of q3}{accepting}
-     \newTransition{SS}{S}{$\epsilon$}{bend left}       
-     \newTransition{S}{q2}{a+b}{bend left}
-     \newTransition{q2}{q3}{b}{bend left}
-     \newTransition{q2}{q3}{c}{below}
-     \newTransition{S}{q3}{b}{below, bend right}
-     \newTransition{q2}{q4}{$\epsilon$}{above, bend left=45}
-     \newTransition{q3}{q4}{$\epsilon$}{bend left}
-   \end{tikzpicture}
-\end{center}
-\end{frame}
-
-\begin{frame}[t]{The State Removal Method - 2}
-\begin{center}
   \begin{tikzpicture}[node distance=\dy and \dx,
     >=latex,shorten >=2pt,shorten <=2pt,auto,
     semithick  %semithick, thick, thin semithick
@@ -849,60 +796,73 @@ State & a & b & c \\
     \newTransition{q2}{q4}{$\epsilon$}{above, bend left=45}
     \newTransition{q3}{q4}{$\epsilon$}{bend left}
   \end{tikzpicture}
-\end{center}
 
-\vspace{0.1cm}
+  \framebreak
+  
+  \begin{tikzpicture}[node distance=\dy and \dx,
+    >=latex,shorten >=2pt,shorten <=2pt,auto,
+    semithick  %semithick, thick, thin semithick
+    ]
+    \newState{SS}{$S$}{}{}
+    \newState{S}{$0$}{right=of SS}{}
+    \newState{q2}{$2$}{right=of S}{}
+    \newState{q3}{$3$}{right=of q2}{}
+    \newState{q4}{$4$}{right=of q3}{accepting}
+    \newTransition{SS}{S}{$\epsilon$}{bend left}       
+    \newTransition{S}{q2}{a+b}{bend left}
+    \newTransition{q2}{q3}{b}{bend left}
+    \newTransition{q2}{q3}{c}{below}
+    \newTransition{S}{q3}{b}{below, bend right}
+    \newTransition{q2}{q4}{$\epsilon$}{above, bend left=45}
+    \newTransition{q3}{q4}{$\epsilon$}{bend left}
+  \end{tikzpicture}
 
-Getting rid of State 3:
+  \vspace{0.1cm}
+  
+  Getting rid of State 3:
 
-\vspace{1.5cm}
+  \vspace{1.5cm}
+  
+  Getting rid of State 2:
 
-Getting rid of State 2:
+  \framebreak
 
-\end{frame}
-
-
-\begin{frame}[t]{The State Removal Method - 2}
-    
   Getting rid of State 3:
   
-  \begin{center}
-    \begin{tikzpicture}[node distance=\dy and \dx,
-      >=latex,shorten >=2pt,shorten <=2pt,auto,
-      semithick  %semithick, thick, thin semithick
-      ]
-      \newState{SS}{$S$}{}{}
-      \newState{S}{$0$}{right=of SS}{}
-      \newState{q2}{$2$}{right=of S}{}
-      \newState{q4}{$4$}{right=of q3}{accepting}
-      \newTransition{SS}{S}{$\epsilon$}{bend left}       
-      \newTransition{S}{q2}{a+b}{bend left}
-      \newTransition{q2}{q4}{(b$\vert$c)?}{bend left}
-      \newTransition{S}{q4}{b}{below, bend right}
-    \end{tikzpicture}
-  \end{center}
+  \begin{tikzpicture}[node distance=\dy and \dx,
+    >=latex,shorten >=2pt,shorten <=2pt,auto,
+    semithick  %semithick, thick, thin semithick
+    ]
+    \newState{SS}{$S$}{}{}
+    \newState{S}{$0$}{right=of SS}{}
+    \newState{q2}{$2$}{right=of S}{}
+    \newState{q4}{$4$}{right=of q3}{accepting}
+    \newTransition{SS}{S}{$\epsilon$}{bend left}       
+    \newTransition{S}{q2}{a+b}{bend left}
+    \newTransition{q2}{q4}{(b$\vert$c)?}{bend left}
+    \newTransition{S}{q4}{b}{below, bend right}
+  \end{tikzpicture}
   
   Getting rid of State 2:
   
-  \begin{center}
-    \begin{tikzpicture}[node distance=\dy and \dx,
-      >=latex,shorten >=2pt,shorten <=2pt,auto,
-      semithick  %semithick, thick, thin semithick
-      ]
-      \newState{SS}{$S$}{}{}
-      \newState{S}{$0$}{right=of SS}{}
-      \newState{q4}{$4$}{right=of q3}{accepting}
-      \newTransition{SS}{S}{$\epsilon$}{bend left}  
-      \newTransition{S}{q4}{a+b(b$\vert$c)?}{bend left}     
-      \newTransition{S}{q4}{b}{below, bend right}
-    \end{tikzpicture}
-  \end{center}
+  \begin{tikzpicture}[node distance=\dy and \dx,
+    >=latex,shorten >=2pt,shorten <=2pt,auto,
+    semithick  %semithick, thick, thin semithick
+    ]
+    \newState{SS}{$S$}{}{}
+    \newState{S}{$0$}{right=of SS}{}
+    \newState{q4}{$4$}{right=of q3}{accepting}
+    \newTransition{SS}{S}{$\epsilon$}{bend left}  
+    \newTransition{S}{q4}{a+b(b$\vert$c)?}{bend left}     
+    \newTransition{S}{q4}{b}{below, bend right}
+  \end{tikzpicture}
 
   The final picture yields the regular expression:
-
-  \centering
-  (a+b(b$\vert$c)?)$\vert$b
+  \[
+    (a+b(b \vert c)?) \vert b
+  \]
 \end{frame}
+
 
 \begin{frame}{Converting regex to FSA (Thompson's construction)}
   \begin{itemize}
@@ -915,14 +875,9 @@ Getting rid of State 2:
   \item you are operating not just on nodes in a graph, but on
     separate {\it automata}, so you need to preserve their start and
     accepting states
-
-  \item A tutorial:
-    \url{https://www.itu.dk/courses/BPRD/E2012/regex-to-nfa.pdf}
-
-  \item Another tutorial:
-    \url{http://web.cecs.pdx.edu/~harry/compilers/slides/LexicalPart3.pdf}
 \end{itemize}
 \end{frame}
+
 
 \begin{frame}[t]{Converting regex to FSA: regex to NFA}
 

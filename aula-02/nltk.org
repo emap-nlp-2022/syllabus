@@ -1,0 +1,340 @@
+#+title: NLTK
+#+PROPERTY: header-args:python :session *my* :exports results :results output
+
+* carregando e inspecionando corpora
+
+#+begin_src python 
+  import nltk
+  from nltk.book import *
+  from nltk.corpus import PlaintextCorpusReader
+#+end_src
+
+#+RESULTS:
+#+begin_example
+,*** Introductory Examples for the NLTK Book ***
+Loading text1, ..., text9 and sent1, ..., sent9
+Type the name of the text or sentence to view it.
+Type: 'texts()' or 'sents()' to list the materials.
+text1: Moby Dick by Herman Melville 1851
+text2: Sense and Sensibility by Jane Austen 1811
+text3: The Book of Genesis
+text4: Inaugural Address Corpus
+text5: Chat Corpus
+text6: Monty Python and the Holy Grail
+text7: Wall Street Journal
+text8: Personals Corpus
+text9: The Man Who Was Thursday by G . K . Chesterton 1908
+#+end_example
+
+agora com os dados carregados, podemos usar funções simples para
+inspecionar os textos previamente carregados.
+
+#+begin_src python 
+  text4.concordance("run")
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Displaying 10 of 10 matches:
+, unless , indeed , I were willing to run counter to the lights of experience a
+Government should not be permitted to run behind or increase its debt in times 
+ tariff is more important in the long run than the perfecting of the reforms in
+ as well as the currents of our trade run quick at all seasons back and forth b
+ come the conviction that in the long run economic morality pays . We are begin
+ed : " Things in life will not always run smoothly . Sometimes we will be risin
+nlarge the area in which its writ may run . Finally , to those nations who woul
+birth . And sometimes our differences run so deep , it seems we share a contine
+ipation of the governed . In the long run , there is no justice without freedom
+nds and the soil to fuel our cars and run our factories . And we will transform
+#+end_example
+
+para obter palavras semelhantes, usadas em contextos parecidos:
+
+#+begin_src python
+  text4.similar("country")
+#+end_src
+
+#+RESULTS:
+: government nation people union world time constitution land citizens
+: peace power states way laws spirit system faith strength republic
+: future
+
+para descobrir os contextos onde duas palavras foram usadas.
+
+#+begin_src python
+  text4.common_contexts(["people", "command"])
+  print()
+  text4.concordance("people")
+  text4.concordance("command")
+#+end_src
+
+#+RESULTS:
+#+begin_example
+the_of our_the
+
+Displaying 25 of 594 matches:
+ the liberties and happiness of the people of the United States a Government i
+zens at large less than either . No people can be bound to acknowledge and ado
+rusted to the hands of the American people . Besides the ordinary objects subm
+ been pleased to favor the American people with opportunities for deliberating
+which has been reposed in me by the people of united America . Previous to the
+e integrity and intelligence of the people , under an overruling Providence wh
+rtainty . The zeal and ardor of the people during the Revolutionary war , supp
+d certainly the only ones which the people at large had ever considered . But 
+mity . In this dangerous crisis the people of America were not abandoned by th
+ny alteration in it but such as the people themselves , in the course of their
+gments of an honest and enlightened people ? For it is the people only that ar
+ enlightened people ? For it is the people only that are represented . It is t
+ue throughout the whole body of the people . And what object or consideration 
+y not be the choice of the American people , but of foreign nations . It may b
+ns who govern us , and not we , the people , who govern ourselves ; and candid
+which it may be exposed ) which the people of America have exhibited to the ad
+ance , and fortitude , conducting a people inspired with the same virtues and 
+e voice of the legislatures and the people throughout the nation . On this sub
+ by the judgments and wishes of the people , expressed in the mode prescribed 
+d religion among all classes of the people , not only for their benign influen
+onscious honor and integrity of the people of America and the internal sentime
+rit , and resources of the American people , on which I have so often hazarded
+nd intellectual improvements of the people deeply engraven on my mind in early
+ a veneration for the religion of a people who profess and call themselves Chr
+and interest , of the same American people pledged to support the Constitution
+Displaying 15 of 15 matches:
+ the affections of its citizens and command the respect of the world . I dwell 
+g by those whose positions will not command a view of the whole ground . I ask 
+ent should be such as to put at the command of the Government the ardent patrio
+a degree of order and harmony as to command the admiration and respect of the c
+ions , to manage their revenue , to command their forces , and , by communicati
+the execution of her laws , and the command of her armies and navies to a perio
+all the remedies which may be at my command . It was certainly a great error in
+s " the Father of his Country ." To command the Army and Navy of the United Sta
+ duty , without asking promotion or command , and without a revengeful feeling 
+their promises not less than by the command of their masters to devote themselv
+ens of different parties , who will command public confidence , both on account
+ with gold by every resource at our command . The credit of the Government , th
+e source of all the strength we can command , for both the enrichment of our li
+eed in all corners of the earth the command of Isaiah -- to " undo the heavy bu
+with all the creative energy at our command , let us begin an era of national r
+#+end_example
+
+Podemos também obter algumas saídas gráficas:
+
+#+begin_src python
+  text4.dispersion_plot(["racism", "democracy", "terrorism", "duties"])
+#+end_src
+
+* vocabulário
+
+#+begin_src python 
+  a, b, c = len(set(text3)), len(text3), text3[:20]
+  print(f"{a} {b}")
+  for x in c: print(x)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+2789 44764
+In
+the
+beginning
+God
+created
+the
+heaven
+and
+the
+earth
+.
+And
+the
+earth
+was
+without
+form
+,
+and
+void
+#+end_example
+
+algumas funções auxiliares:
+
+#+begin_src python
+  def lexical_diversity(text):
+      return len(set(text)) / len(text)
+
+  def percentage(count, total):
+      return 100 * count / total
+
+  a, b = lexical_diversity(text3), lexical_diversity(text5)
+  print(f" text 3 = {a} \n text 5 = {b}")
+#+end_src
+
+#+RESULTS:
+:  text 3 = 0.06230453042623537 
+:  text 5 = 0.13477005109975562
+
+Distribuição de frequencias:
+
+#+begin_src python
+  fdist1 = FreqDist(text4)
+  for x in fdist1.most_common(100)[40:50]:
+      print(x)
+
+  print()
+  V = set(text7)
+  long_words = [w for w in V if len(w) > 15]
+  for x in sorted(long_words)[:15]:
+      print(x)
+
+  print()    
+  fdist5 = FreqDist(text5)
+  for x in sorted(w for w in set(text5) if len(w) > 5 and fdist5[w] > 7)[10:20]:
+      print(x)
+
+  print()    
+  for x in sorted(w for w in set(text1) if w.endswith('ness'))[:15]:
+      print(x)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+('my', 472)
+('no', 419)
+('an', 388)
+('who', 376)
+('must', 373)
+('so', 369)
+('It', 366)
+('upon', 365)
+('--', 363)
+('they', 358)
+
+238,000-circulation
+Arbitrage-related
+Bridgestone\/Firestone
+Chinese-American
+Corton-Charlemagne
+English-speaking
+Freeport-McMoRan
+Hart-Scott-Rodino
+Lafite-Rothschild
+Louisiana-Pacific
+Macmillan\/McGraw
+Macmillan\/McGraw-Hill
+Metallgesellschaft
+Minneapolis-based
+Philadelphia-based
+
+Welcome
+actually
+already
+always
+another
+anybody
+anyone
+anything
+around
+asking
+
+Business
+Darkness
+Loveliness
+Madness
+Righteousness
+Unfitness
+Whiteness
+Witness
+aboriginalness
+acridness
+acuteness
+adhesiveness
+apprehensiveness
+artificialness
+awfulness
+#+end_example
+
+Distribuição condicional
+
+#+begin_src python
+  from nltk.corpus import brown
+  genre_word = [(genre, word)
+		for genre in brown.categories()
+		for word in brown.words(categories=genre)]
+  cfd = nltk.ConditionalFreqDist(genre_word)
+  print(cfd.conditions())
+  print(cfd['government'].most_common(400)[-10:])
+#+end_src
+
+Finalmente, colocações vs bigramas:
+
+#+begin_src python
+  for x in list(bigrams(['more', 'is', 'said', 'than', 'done'])): print(x)
+  print()
+  text4.collocations()
+#+end_src
+
+#+RESULTS:
+#+begin_example
+('more', 'is')
+('is', 'said')
+('said', 'than')
+('than', 'done')
+
+United States; fellow citizens; years ago; four years; Federal
+Government; General Government; American people; Vice President; God
+bless; Chief Justice; one another; fellow Americans; Old World;
+Almighty God; Fellow citizens; Chief Magistrate; every citizen; Indian
+tribes; public debt; foreign nations
+#+end_example
+
+* DHBB
+
+#+begin_src python
+  corpus_root = '../dhbb/'
+  dhbb = PlaintextCorpusReader(corpus_root, '.*')
+  print(dhbb)
+
+  # arquivos
+  a = dhbb.fileids()[:3]
+  for x in a: print(x)
+
+  # sentenças
+  b = dhbb.sents()
+  for x in [s for s in b if len(s) < 10][:4]: print(x)
+
+  # words 
+  c = dhbb.words()[:3]
+  for x in c: print(x)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+<PlaintextCorpusReader in '/Users/ar/Sites/nlp-2022.2/syllabus/dhbb'>
+31.txt
+310.txt
+3100.txt
+['Reformou', '-', 'se', 'no', 'posto', 'de', 'general', '.']
+['Casou', '-', 'se', 'com', 'Aurora', 'Campos', 'Machado', '.']
+['Em', 'julho', 'de', '1922', 'foi', 'promovido', 'a', 'capitão', '.']
+['Era', 'casado', 'com', 'Jandira', 'Serejo', 'Machado', '.']
+«
+João
+Vespúcio
+#+end_example
+
+gerando alguns textos usando distribuição condicional:
+
+#+begin_src python
+  def generate_model(cfdist, word, num=30):
+	  for i in range(num):
+		  print(word, end=' ')
+		  word = cfdist[word].max()
+
+  text = dhbb.words()
+  bigrams = nltk.bigrams(text)
+  cfd = nltk.ConditionalFreqDist(bigrams) 
+  generate_model(cfd, 'elegeu')
+#+end_src
+
+#+RESULTS:
+: elegeu - se a presidência da República , o governo de Janeiro , o governo de Janeiro , o governo de Janeiro , o governo de Janeiro , o governo
+

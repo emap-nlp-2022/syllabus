@@ -9,17 +9,27 @@
 
 * aula 1 <2022-08-02 Tue>
 
-  - [[file:aula-01.pdf]]
-    - apresentação do curso
-    - motivação para estudar NLP e IR
-    - https://youtu.be/ax6Kal18Ki4?t=700
+- apresentação do curso
+- motivação para estudar NLP e IR
+- https://youtu.be/ax6Kal18Ki4?t=700
 
 * aula 2 <2022-08-03 Wed>
 
-  - capítulos 1 e 2 do NLTK book
-  - básico de Python
-  - notebooks no folder file:aula-02/
-  - assignment-00 https://classroom.github.com/a/ucAYaFwm
+- capítulos 1 e 2 do NLTK book
+- básico de Python: Spacy e NLTK
+- assignment-00 https://classroom.github.com/a/ucAYaFwm
+
+* aula 3 <2022-08-08 Mon>
+
+- básico Python: Spacy, NLTK
+- Unix Tools
+- Linguagens Formais, REGEX, FSA
+
+* aula 4 <2022-08-11 Thu>
+
+- Linguagens Formais, REGEX, FSA
+- Morfologia
+
   
 * Referencias
 
