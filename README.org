@@ -30,6 +30,22 @@
 - Linguagens Formais, REGEX, FSA
 - Morfologia
 
+* aula 5 <2022-08-16 Tue>
+
+- Morfologia
+- Foma (veja bibliotecas)
+- http://clt.gu.se/sites/clt.gu.se/files/mkp/clttutorial.pdf
+- https://ling.sprachwiss.uni-konstanz.de/pages/home/boegel/Dateien/CLT09_tutorial.pdf
+- https://web.stanford.edu/~laurik/publications/acl-95/acl95.html
+
+* aula 6 <2022-08-18 Thu>
+
+- Morfologia, Foma (veja bibliotecas)
+- [[https://fomafst.github.io/morphtut.html][tutorial 2]] do Foma
+- http://clt.gu.se/sites/clt.gu.se/files/mkp/clttutorial.pdf
+- https://ling.sprachwiss.uni-konstanz.de/pages/home/boegel/Dateien/CLT09_tutorial.pdf
+- https://web.stanford.edu/~laurik/publications/acl-95/acl95.html
+
   
 * Referencias
 
