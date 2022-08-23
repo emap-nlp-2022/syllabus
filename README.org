@@ -46,6 +46,14 @@
 - https://ling.sprachwiss.uni-konstanz.de/pages/home/boegel/Dateien/CLT09_tutorial.pdf
 - https://web.stanford.edu/~laurik/publications/acl-95/acl95.html
 
+* aula 7 <2022-08-23 Tue>
+
+- Modelos de Linguagem
+- https://web.stanford.edu/~jurafsky/slp3/3.pdf
+- slides
+- https://twitter.com/filippie509/status/1559583211612622848
+- https://twitter.com/arademaker/status/1561371339029716993
+
   
 * Referencias
 
