@@ -1,0 +1,217 @@
+% lgcomp.sty, v. 1 (21/12/12)
+% companion files to "Language and Computers"
+% Dickinson, Brew, & Meurers (2013)
+
+%%%%%%%%%%%%%%%%%%%%%
+% Front Matter
+
+\usepackage{txfonts}
+
+\usepackage{multicol}
+
+% support direct input of 8bit Latin1 characters:
+%\usepackage[latin1]{inputenc}
+
+\mode<presentation>
+{
+  \usetheme{Goettingen}
+
+  % show hidden material in background
+%  \setbeamercovered{transparent}
+
+  % show slide number in footline:
+\setbeamertemplate{footline}{% 
+  \hfill% 
+  \usebeamercolor[fg]{page number in head/foot}% 
+  \usebeamerfont{page number in head/foot}% 
+  \insertframenumber%
+  \,/\,\inserttotalframenumber
+  \kern1em\vskip2pt% 
+}
+\hypersetup{colorlinks,
+  urlcolor=red!20!black,
+  linkcolor=black,
+  anchorcolor=black,
+  filecolor=black,
+  menucolor=black,
+  citecolor=black}
+}
+
+%\mode<presentation>
+\mode<beamer>
+{
+  % http://www.ntnu.no/info/selvhjelp/ntnubeamer/beamer.pdf (p. 50, 165)
+  % use color emphasis on sidebar:
+  \setbeamercolor{structure}{fg=red!65!black,bg=white}
+  \setbeamertemplate{sidebar canvas right}[vertical shading][top=red!60!black,bottom=red!50!white]
+  \setbeamercolor{palette sidebar primary}{fg=red!75!black,bg=white}
+  \setbeamercolor{palette sidebar secondary}{fg=red!75!black,bg=white}
+  \setbeamercolor{palette primary}{fg=parent.bg}   %%fg=white}
+  \setbeamercolor{palette secondary}{fg=parent.bg} %%fg=white}
+}
+
+\mode<handout>
+{
+\usecolortheme{sidebartab}
+% use black and white for printing:
+\usecolortheme[rgb={0.1,0.1,0.1}]{structure}
+
+% don't show navigation symbols for printing:
+\setbeamertemplate{navigation symbols}{}
+}
+
+% url style is automatically loaded by beamer class, specifications: 
+\urlstyle{sf}
+\def\UrlSpecials{\do\~{\mbox{\~{}}}\do_{\_}\do\%{}\do\\{}}
+\newcommand{\localurl}[1]{}
+
+\usepackage[sectionbib]{natbib}
+\bibpunct[, ]{(}{)}{;}{a}{}{,}
+
+\usepackage{gb4e+}
+
+% Addition for use of gb4e.sty with beamer.cls to ensure
+% example counters remain the same across slides of a frame
+\resetcounteronoverlays{xnumi}
+\resetcounteronoverlays{xnumii}
+\resetcounteronoverlays{xnumiii}
+\resetcounteronoverlays{xnumiv}
+\resetcounteronoverlays{exx}
+\resetcounteronoverlays{fnx}
+\resetcounteronoverlays{rxnumi}
+\resetcounteronoverlays{rxnumii}
+\resetcounteronoverlays{rxnumiii}
+\resetcounteronoverlays{rxnumiv}
+
+\parindent 0in
+
+% If one wants the table of contents to pop up at
+% the beginning of each subsection, comment in:
+%\AtBeginSubsection[]
+%{
+%  \begin{frame}<beamer>
+%    \frametitle{Outline}
+%    \tableofcontents[currentsection,currentsubsection]
+%  \end{frame}
+%}
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+%\usefonttheme[onlysmall]{structurebold}
+
+\makeatletter
+
+% wdm
+% while in themes/color/beamercolorthemedefault.sty it says:
+% \setbeamercolor{subtitle}{parent=title}
+% this does not inherit down to 'subtitle in sidebar'
+% so we here need to add:
+%  \setbeamercolor{subtitle in sidebar}{parent=palette sidebar fourth}
+
+% we actually want other colors though:
+% 9/4/07
+  \setbeamercolor{title in sidebar}{parent=palette sidebar primary}
+  \setbeamercolor{subtitle in sidebar}{parent=title in sidebar}
+
+% at the top of the sidebar, we want the subtitle to appear 
+% instead of the author, so we define and activate 'mysidebar theme'
+% (activation is automatic since the * variant of command is used)
+  \defbeamertemplate*{sidebar \beamer@sidebarside}{mysidebar theme}
+  {
+    \beamer@tempdim=\beamer@sidebarwidth%
+    \advance\beamer@tempdim by -6pt%
+    {\usebeamerfont{title in sidebar}%
+      \vskip1.5em%
+      \hskip3pt%
+      \usebeamercolor[fg]{title in sidebar}%
+      \insertshorttitle[width=\beamer@tempdim,center,respectlinebreaks]\par%
+      \vskip1em%
+    }%
+    {%
+      \hskip3pt%
+      \usebeamercolor[fg]{subtitle in sidebar}%
+      \usebeamerfont{title in sidebar}% wdm: same font as title here 
+%wdm changed:
+%      \insertshortauthor[width=\beamer@tempdim,center,respectlinebreaks]\par%
+      \insertshortsubtitle[width=\beamer@tempdim,center,respectlinebreaks]\par%
+      \vskip1.25em%
+    }%
+    \insertverticalnavigation{\beamer@sidebarwidth}%
+    \vfill
+    \ifx\beamer@sidebarside\beamer@lefttext%
+    \else%
+      \usebeamercolor{normal text}%
+      \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+      \vskip2pt%
+    \fi%
+  }
+
+
+% we define and activate a 'lecture' title page, which
+% has different spacing (and sizes, cf below) of author/date/institution 
+\defbeamertemplate*{title page}{lecture}[1][]
+{
+  \vbox{}
+  \vfill
+  \begin{centering}
+    \begin{beamercolorbox}[sep=8pt,center,#1]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}%
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=0pt,center,#1]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=-4pt,center,#1]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=0pt,center,#1]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}\vskip0.5em
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+  \end{centering}
+  \vfill
+}
+
+\setbeamerfont{author}{size=\scriptsize}
+\setbeamerfont{date}{size=\scriptsize}
+
+\makeatother
+
+
+\newcommand{\attribution}[1]{\vspace{\baselineskip}
+{\tiny#1}
+\vspace{-2\baselineskip}
+\mbox{}}
+
+\newcommand{\titleframe}{\begin{frame}[t]
+  \mbox{}
+  \vfill
+  \titlepage 
+  \vfill
+  \footnoterule
+\end{frame}}
+
+\newcommand{\outlineframe}{\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[pausesections,hideallsubsections]
+\end{frame}}
+
+\newcommand{\fulloutlineframe}{\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[pausesections]
+\end{frame}}
+
+\newcommand{\mypause}{}
+
+\usepackage{tipa}
+
+% End front matter
+%%%%%%%%%%%%%%%%%%%%%

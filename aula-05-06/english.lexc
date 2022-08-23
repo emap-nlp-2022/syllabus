@@ -1,0 +1,42 @@
+!!! english.lexc !!!
+
+Multichar_Symbols +N +V +PastPart +Past +PresPart +3P +Sg +Pl
+
+LEXICON Root
+
+Noun ;
+Verb ;
+
+LEXICON Noun
+
+cat    Ninf;
+cactus Ninf;
+cactus+N+Pl:cacti #;
+city   Ninf;
+fox    Ninf;
+panic  Ninf;
+try    Ninf;
+watch  Ninf;
+
+LEXICON Verb
+
+beg   Vinf;
+fox   Vinf;
+make  Vinf;
+panic Vinf;
+try   Vinf;
+watch Vinf;
+
+LEXICON Ninf
+
++N+Sg:0   #;
++N+Pl:^s  #;
+
+LEXICON Vinf
+
++V:0             #;
++V+3P+Sg:^s      #;
++V+Past:^ed      #;
++V+PastPart:^ed  #;
++V+PresPart:^ing #;
+
