@@ -53,8 +53,13 @@
 - slides
 - https://twitter.com/filippie509/status/1559583211612622848
 - https://twitter.com/arademaker/status/1561371339029716993
+- compare a previsão de palavras com via ML com
+  http://cloud.grammaticalframework.org/minibar/minibar.html
 
-  
+* aula 8 <2022-08-25 Thu>
+
+- modelos de linguagem, prática
+
 * Referencias
 
   - https://www.nltk.org/book/
@@ -104,10 +109,11 @@ environment:
   git clone git@github.com:emap-nlp/syllabus.git
   python3 -m venv venv
   source venv/bin/activate
-  pip install --upgrade pip
+  pip install pip --upgrade
   pip install jupyterlab
   pip install nltk
   pip install spacy
+  pip install gensim --upgrade
   pip install -U matplotlib
 #+end_src
 
