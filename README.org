@@ -101,7 +101,11 @@
 * Como usar notebooks
 
 Usando o `venv` criei um venv de Python3 e instalei tudo no mesmo
-environment:
+environment. Note que no código abaixo, seu diretório ROOT será o
+=nlp-2022= e dentro dele haverá o clone do =syllabus=. Neste mesmo
+ROOT, vc poderá clonar os repositórios dos assignments e com isso
+compartilhar o mesmo virtual environment para o syllabus e para os
+assignments.
 
 #+begin_src bash
   mkdir nlp-2022
@@ -110,11 +114,7 @@ environment:
   python3 -m venv venv
   source venv/bin/activate
   pip install pip --upgrade
-  pip install jupyterlab
-  pip install nltk
-  pip install spacy
-  pip install gensim --upgrade
-  pip install -U matplotlib
+  pip install -r syllabus/requirements.txt
 #+end_src
 
 Carregar com:

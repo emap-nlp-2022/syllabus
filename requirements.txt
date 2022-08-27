@@ -1,0 +1,5 @@
+jupiterlab
+nltk
+spacy
+gensim
+matplotlib
