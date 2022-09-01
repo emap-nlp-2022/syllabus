@@ -1,4 +1,4 @@
-jupiterlab
+jupyterlab
 nltk
 spacy
 gensim

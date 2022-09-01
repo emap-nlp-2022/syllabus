@@ -58,7 +58,20 @@
 
 * aula 8 <2022-08-25 Thu>
 
-- modelos de linguagem, prática
+- prática de modelos de linguagem
+- prática de representação de palavras e documentos com aplicação para 'buscas'
+
+* aula 9 <2022-08-30 Tue>
+
+- sobre avaliação do código gensim última aula!
+- sobre assignment-02: morfologia
+- sobre assignment-03: modelos de linguagem
+- rotulagem de sequência
+
+* aula 10 <2022-09-01 Thu>
+
+- Ver sistema PALAVRAS https://visl.sdu.dk/visl/pt/parsing/automatic/dependency.php
+- slides   
 
 * Referencias
 
