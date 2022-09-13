@@ -30,6 +30,9 @@
 - Linguagens Formais, REGEX, FSA
 - Morfologia
 
+- https://fomafst.github.io/morphtut.html
+- https://github.com/LR-POR/MorphoBr/
+
 * aula 5 <2022-08-16 Tue>
 
 - Morfologia
@@ -42,9 +45,6 @@
 
 - Morfologia, Foma (veja bibliotecas)
 - [[https://fomafst.github.io/morphtut.html][tutorial 2]] do Foma
-- http://clt.gu.se/sites/clt.gu.se/files/mkp/clttutorial.pdf
-- https://ling.sprachwiss.uni-konstanz.de/pages/home/boegel/Dateien/CLT09_tutorial.pdf
-- https://web.stanford.edu/~laurik/publications/acl-95/acl95.html
 
 * aula 7 <2022-08-23 Tue>
 
@@ -59,7 +59,7 @@
 * aula 8 <2022-08-25 Thu>
 
 - prática de modelos de linguagem
-- prática de representação de palavras e documentos com aplicação para 'buscas'
+- prática de representação de palavras e documentos com aplicação para 'buscas' (lib gensim)
 
 * aula 9 <2022-08-30 Tue>
 
@@ -70,9 +70,41 @@
 
 * aula 10 <2022-09-01 Thu>
 
-- Ver sistema PALAVRAS https://visl.sdu.dk/visl/pt/parsing/automatic/dependency.php
-- slides   
+- Ver sistema PALAVRAS
+  https://visl.sdu.dk/visl/pt/parsing/automatic/dependency.php,
+  anotação de POS via regras usando a teoria de
+  https://en.wikipedia.org/wiki/Constraint_grammar
 
+- slides
+
+* aula 11 <2022-09-06 Mon>
+
+- pos tagging
+- sequence labeling
+
+  Nossa Senhora do Carmo vs Igreja do
+  Carmo... https://pt.wikipedia.org/wiki/Nossa_Senhora_do_Carmo
+
+- anotação de entidades nomeadas ([[https://web.stanford.edu/~jurafsky/slp3/8.pdf][sec 8.3]])
+  
+- ferramenta [[https://www.ibm.com/br-pt/cloud/watson-knowledge-studio][watson knowledge studio]]
+- demo [[http://dhbb.mybluemix.net/dhbb/document?id=2927][dhbb]]
+- exemplo de possíveis fontes de dados para dicionários (usados em
+  pré-anotação), [[https://pt.wikipedia.org/wiki/Lista_de_munic%C3%ADpios_do_Brasil_por_popula%C3%A7%C3%A3o_(2020)][lista de municípios]]
+- problema relacionado, entity linking: http://www.wikifier.org/
+- outra biblioteca de NLP com bom suporte Português - [[https://freeling-user-manual.readthedocs.io/en/latest/][freeling]] -
+  afinal eu contribui com isso! ;-)
+
+* aula 12 <2022-09-08 Thu>
+
+- demo tagger
+- análise sintática, parsing
+
+* aula 13 <2022-09-13 Tue>
+
+- análise sintática, parsing
+- capitulos 12, 13 e 14
+  
 * Referencias
 
   - https://www.nltk.org/book/

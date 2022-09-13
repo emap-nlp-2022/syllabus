@@ -1,0 +1,377 @@
+\documentclass{beamer}
+
+\usepackage[english]{babel}
+% \usepackage[latin1]{inputenc}
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+
+\usepackage{latexsym}
+\usepackage{eepic}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{multicol}
+
+\newcommand{\newterm}[1]{{\alert{#1}}}
+\newcommand{\figtype}[1]{{\bf \strut #1}}
+
+\newcommand{\builtin}[1]{{\bf #1}}
+\newcommand{\myvar}[1]{{\tt #1}}
+\newcommand{\myfn}[1]{{\tt #1}}
+\newcommand{\standin}[1]{{\it #1}}
+
+\newcommand{\op}[1]{\, #1 \,}
+\newcommand{\unify}{\op{\sqcap}}
+
+\newcommand{\cddunify}{\stackrel{{\scriptscriptstyle <}} 
+  {\sqcap}_{ca}}
+\newcommand{\dunify}{\stackrel{{\scriptscriptstyle <}}
+  {\sqcap}}
+\newcommand{\ddunify}{\stackrel{{\scriptscriptstyle <>}}
+  {\sqcap}}
+\newcommand{\xdunify}{\stackrel{{\scriptscriptstyle <}} 
+  {\sqcap}_{x}}
+\newcommand{\csddunify}{\stackrel{{\scriptscriptstyle <}}
+  {\sqcap}_{cs}}
+
+
+\newcommand{\modal}[1]{\langle #1 \rangle}
+%\newcommand{\hidden}[1]{}
+\newcommand{\hidden}[1]{#1}
+\newcommand{\notpublic}[1]{}% public version
+%\newcommand{\notpublic}[1]{#1}
+\newcommand{\lrulearrow}{\mapsto}
+
+\newcommand{\lkbentryname}[1]{{\texttt{#1}}}
+
+%\newcommand{\pred}[1]{\mbox{#1$'$}}
+
+\newcommand{\figtext}{\normalsize}
+
+\newcommand{\sentbound}{$\langle\mbox{s}\rangle$}
+\newcommand{\sentbend}{$\langle\mbox{/s}\rangle$}
+\newcommand{\affix}{\ \mbox{}\hat{\mbox{}}\mbox{}\ }
+
+\newenvironment{pseudocode}
+{\begin{tabbing}}
+{\end{tabbing}}
+
+\newcommand{\pcvar}[1]{{\color[rgb]{0,0,1}{\it #1}}}
+
+\newcommand{\edge}[1]{[#1]}
+
+\newcommand{\avmplus}[1]{{\setlength{\arraycolsep}{0.8mm}	
+                       \renewcommand{\arraystretch}{1.2} %1.2
+                       \left[ 			
+                       \begin{array}{l}
+                       \\[-5mm] #1 \\[-5mm] \\
+                       \end{array} 		
+                       \right]
+                    }}
+\newcommand{\attval}[2]{{\mbox{\normalsize\sc #1}\ \ {{#2}}}}
+\newcommand{\attvaltyp}[2]{{\mbox{\normalsize\sc #1}\ \ \ \ {\myvaluebold{#2}}}}
+\newcommand{\myvaluebold}[1]{{\mbox{\normalsize {\bf #1}}}}
+\newcommand{\ind}[1]{{\setlength{\fboxsep}{0.25mm} \: \fbox{{\small #1}} \:}}
+
+
+\newcommand{\savmplus}[1]{{\setlength{\arraycolsep}{0.5mm}	
+                       \renewcommand{\arraystretch}{1.0} %1.2
+                       \left[ 			
+                       \begin{array}{l}
+                       \\[-5mm] #1 \\[-5mm] \\
+                       \end{array} 		
+                       \right]
+                    }}
+\newcommand{\sattval}[2]{{\mbox{\small\sc #1}\ {{#2}}}}
+\newcommand{\sattvaltyp}[2]{{\mbox{\small\sc #1}\ \ {\smyvaluebold{#2}}}}
+\newcommand{\smyvaluebold}[1]{{\mbox{\small {\bf #1}}}}
+
+% commands for figures
+\newcommand{\figfeat}[1]{{\sc \strut #1}}
+\newcommand{\nodedot}{\circle*{5}}
+\newcommand{\feature}{\sc}
+\newcommand{\type}{\bf}
+
+\newenvironment{myeg}
+{\begin{trivlist} \item \color[rgb]{0,1,0}}
+{\end{trivlist}}
+
+\newenvironment{indented}
+{\begin{trivlist} \item}
+{\end{trivlist}}
+
+\newcommand{\egtext}[1]{{\color[rgb]{0,1,0} #1}}
+
+\newcommand{\redthing}[1]{{\color[rgb]{1,0,0} #1}}
+
+\newcommand{\bluething}[1]{{\color[rgb]{0,0,1} #1}}
+
+\newcommand{\purplething}[1]{{\color[rgb]{1,0,1} #1}}
+
+\newcommand{\cfga}{$\rightarrow$}
+
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+
+\newcommand{\fvec}{\vec{f}}
+% use in math mode
+
+\title{Natural Language Processing and IR}
+\author{Ann Copestake}
+\institute{FGV/EMAp}
+
+\newcommand{\pred}[1]{{\mbox{#1}'}}
+\newcommand{\qeq}{$=_q$ }
+
+\begin{document}
+
+\begin{frame}{Corpora}
+
+\begin{itemize}
+\item \newterm{corpus}: text that has been collected
+for some purpose.
+\item \newterm{balanced corpus}: texts representing different genres\\
+\newterm{genre} is a type of text (vs domain)
+\item \newterm{tagged corpus}: a corpus annotated with POS tags
+\item \newterm{treebank}: a corpus annotated with parse trees
+\item specialist corpora --- e.g., collected to
+train or evaluate particular applications
+\begin{itemize}
+\item Movie reviews for sentiment classification
+\item Data collected from simulation of a dialogue system
+\end{itemize}
+\end{itemize}
+\end{frame} 
+
+
+\begin{frame}{Part of speech tagging}
+
+They can fish.\\
+\begin{itemize}
+\item They\_pronoun can\_modal fish\_verb.\\
+(`can' meaning `are able to')
+\item They\_pronoun can\_verb fish\_plural-noun.\\
+(`can' meaning `put into cans')
+\end{itemize}
+\newterm{Ambiguity}\\
+{\it can}: modal verb, verb, singular noun\\
+{\it fish}: verb, singular noun, plural noun
+\end{frame}
+
+
+\begin{frame}{Tagset}
+
+\newterm{tagset}: standardized codes for fine-grained parts of speech.\\  
+CLAWS 5: over 60 tags, including:\\[0.1in]
+\begin{tabular}{ll | ll}
+NN1 & singular noun & NN2 & plural noun\\
+PNP & personal pronoun & VM0 & modal auxiliary verb\\
+VVB & base form of verb & VVI & infinitive form of verb
+\end{tabular}\\[0.1in]
+
+\begin{itemize}
+\item They\_PNP can\_VM0 fish\_VVI .\_PUN 
+\item They\_PNP can\_VVB fish\_NN2 .\_PUN
+\item They\_PNP can\_VM0 fish\_NN2 .\_PUN \alert{  no full parse}
+\item etc
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Why POS tag?}
+
+Coarse-grained syntax / word sense disambiguation:
+fast, so applicable to very large corpora.
+\begin{itemize}
+\item Some linguistic research and lexicography: e.g.,
+how often is {\it tango} used as a verb? {\it dog}?
+\item Named entity recognition and similar tasks 
+(finite state patterns over POS tagged data).
+\item Features for machine learning e.g., sentiment classification.
+(e.g., {\it stink\_V}\/ vs {\it stink\_N}\/).
+\item Fast preliminary processing for full parsing: provide guesses at unknown words,
+cut down search space.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Stochastic part of speech tagging using Hidden Markov Models (HMM)}
+\begin{enumerate}
+\item Start with untagged text.
+\item Assign all possible tags to each word in the text on the basis
+of a lexicon that associates words and tags.
+\item Find the most probable sequence (or n-best sequences) of tags, based on
+probabilities from the training data.
+\begin{itemize}
+\item lexical probability: e.g., is {\it can}
+most likely to be VM0, VVB, VVI or NN1? 
+\item and tag sequence probabilities: e.g., 
+is VM0 or NN1 more likely after PNP?
+\end{itemize}
+\end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Assigning probabilities}
+
+Estimate tag sequence: $n$ tags with the maximum probability, given
+$n$ words:
+\[
+\hat{t}^n_1 = \argmax_{t^n_1} P(t^n_1 | w^n_1)
+\]
+
+
+By Bayes theorem:
+\[
+P(t^n_1 | w^n_1) = \frac{  P(w^n_1 | t^n_1) P(t^n_1)}{P(w^n_1)}
+\]
+
+but $P(w^n_1)$ is constant:
+
+\[
+\hat{t}^n_1 = \argmax_{t^n_1} P(w^n_1 | t^n_1) P(t^n_1) 
+\]
+
+
+\end{frame} 
+
+\begin{frame}
+\frametitle{Bigrams}
+
+Bigram assumption: probability of a tag depends on previous 
+tag, hence product of bigrams:
+\[ P(t^n_1) \approx \prod^n_{i=1} P(t_i | t_{i-1}) \]
+
+Probability of word estimated on basis of its tag alone:
+\[ P(w^n_1 | t^n_1) \approx \prod^n_{i=1} P(w_i | t_i) \]
+
+Hence:
+\[
+\hat{t}^n_1 =  \argmax_{t^n_1} \prod^n_{i=1} P(w_i | t_i) P(t_i | t_{i-1}) 
+\]
+
+\end{frame} 
+
+\begin{frame}
+\frametitle{Example}
+
+Tagging: {\it they fish} (ignoring punctuation)
+
+Assume PNP is the only tag for {\it they},
+and that {\it fish} could be NN2 or VVB.
+
+Then the estimate for PNP NN2 will be:
+
+\[
+P(\mbox{they} | \mbox{PNP})\ P(\mbox{NN2}|\mbox{PNP})\ P(\mbox{fish}|\mbox{NN2})
+\]
+
+and for PNP VVB:
+
+\[
+P(\mbox{they} | \mbox{PNP}) \ P(\mbox{VVB}|\mbox{PNP}) \ P(\mbox{fish}|\mbox{VVB})
+\]
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Training stochastic POS tagging}
+
+\begin{semiverbatim}
+They_PNP used_VVD to_TO0 can_VVI fish_NN2 in_PRP 
+those_DT0 towns_NN2 ._PUN But_CJC now_AV0 few_DT0 
+people_NN2 fish_VVB in_PRP these_DT0 areas_NN2 
+._PUN
+\end{semiverbatim}
+\pause
+\begin{tabular}{lll}
+sequence  &     count &  bigram probability\\ \hline \hline
+NN2        &      4    &           \\ \hline
+NN2 PRP    &      1   &  0.25 \\
+NN2 PUN    &      2   &  0.5 \\
+NN2 VVB    &      1   &  0.25
+\end{tabular}\\[0.1in]
+\pause
+Also lexicon: fish NN2 VVB
+\end{frame} 
+
+\begin{frame}
+\frametitle{Assigning probabilities, more details}
+\begin{itemize}
+\item Maximise the overall tag sequence probability --- e.g.,
+use Viterbi.
+\item Actual systems use trigrams --- smoothing and backoff are critical.
+\item Unseen words: these are not in the lexicon, so use all possible
+\newterm{open class} tags, possibly restricted by 
+morphology.
+\end{itemize}
+\end{frame} 
+
+\subsection{Evaluation in general, evaluation of POS tagging}
+
+
+\begin{frame}
+\frametitle{Evaluation of POS tagging}
+
+\begin{itemize}
+\item percentage of correct tags
+\item one tag per word (some systems give multiple tags when uncertain)
+\item over 95\% for English on normal corpora
+(but note punctuation is unambiguous)
+\item performance plateau about 97\% on most commonly used test set for English
+\item \newterm{baseline} of taking the most common tag gives 90\% accuracy
+\item different tagsets give slightly different results: utility of tag
+to end users vs predictive power
+\end{itemize}
+
+\end{frame} 
+
+\begin{frame}
+\frametitle{Evaluation in general}
+\begin{itemize}
+\item \newterm{Training data and test data}\   Test data must be
+kept unseen, often 90\% training and 10\% test data.
+\item \newterm{Baseline} 
+\item \newterm{Ceiling}\ 
+Human performance on the task, where the ceiling is the
+percentage agreement found between two annotators
+(\newterm{interannotator agreement})
+\item \newterm{Error analysis} Error rates are nearly always 
+unevenly distributed.
+\item \newterm{Reproducibility} 
+\end{itemize}
+
+\end{frame} 
+
+\begin{frame}
+\frametitle{Representative corpora and data sparsity}
+
+\begin{itemize}
+\item test corpora have to be representative of the actual application
+\item POS tagging and similar techniques are not 
+always very robust to differences in genre
+\item balanced corpora may be better, but still
+don't cover all text types
+\item communication aids: extreme difficulty in obtaining data, text corpora
+don't give good prediction for real data
+\end{itemize}
+\end{frame}
+ 
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
