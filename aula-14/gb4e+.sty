@@ -1,0 +1,150 @@
+% File: gb4e+.sty 
+% RCS: $Id: gb4e+.sty,v 1.1 2004/05/10 14:12:18 dm Exp $
+% Purpose: Implements some extensions of gb4e.sty style:
+%          - easy changing of font sizes using \exfont and \glossfont
+%          - automatic adjustment of example font size in footnotes
+%          - some handy interface predicates, e.g.:
+%            \mytrans{...} to specify translation surrounded by quotes
+%            \hspaceThis{...} to space over some text in the glosses
+%            \pref{...} for \ref with parenthesis around it
+% Author: Detmar Meurers (dm@ling.osu.edu)
+% 
+% 
+
+% 28.3.02: commented out ^ active character definitions since
+%          they are incompatible with xypic (dm) 
+
+% 10.6.03: commented out _ active character definitions since
+%          they cause problems (dm) 
+
+\typeout{gb4e+.sty, version $Id: gb4e+.sty,v 1.1 2004/05/10 14:12:18 dm Exp $}
+
+\input{gb4e.sty}
+
+% ---------------------------------------------------------------
+
+% new command \pref as a shorthand for ref with parenthesis around it
+\newcommand{\pref}[1]{(\ref{#1})}
+
+% for fontification of example material in the running text:
+\newcommand{\bsp}[1]{\textit{#1}}
+
+% usefull commands for glossings:
+\newlength{\wdmTmp}
+% a) \hspaceThis: hspace over width of something without showing it
+\newcommand{\hspaceThis}[1]{\settowidth{\wdmTmp}{#1}\hspace*{\wdmTmp}}
+
+% b) \noSpace: show something left of the current position:
+\newcommand{\noSpace}[1]{\settowidth{\wdmTmp}{#1}\hspace*{-\wdmTmp}#1}
+
+% left round parenthesis in textup, e.g., for use in italics glossings
+\newcommand{\lrk}{\mbox{\textup{(}}}
+% right round parenthesis in textup , e.g., for use in italics glossings
+\newcommand{\rrk}{\mbox{\textup{\hspace{1pt})}}}
+
+
+% set initial sizes of example number and judgement sizes
+\exewidth{(00)}
+\judgewidth{*} % if wider judgements are needed, enlarge within papers
+
+% Define commands for fonts to be used:
+%
+% 1) regular
+% a. example line
+\newcommand{\exfont}{\normalsize\upshape}
+% b. glossing line
+\newcommand{\glossfont}{\normalsize\upshape}
+% c. translation font
+\newcommand{\transfont}{\small\upshape}
+% d. example number
+\newcommand{\exnrfont}{\exfont\upshape}
+%
+% 2) in footnote
+% a. example line
+\newcommand{\fnexfont}{\footnotesize\upshape}
+% b. glossing line
+\newcommand{\fnglossfont}{\footnotesize\upshape}
+% c. translation font
+\newcommand{\fntransfont}{\scriptsize\upshape}
+% d. example number
+\newcommand{\fnexnrfont}{\fnexfont\upshape}
+
+% new user command for specifying translations:
+\newcommand{\mytrans}[1]{{\trans`#1'}\vskip.6\baselineskip}
+
+% ---------------------------------------------------------------
+% Define some commands for backwards compatibility with old versions 
+% of gb4e+.sty, (wdm, 20.Feb.04)
+
+\let\exsize\exfont
+\let\exsizeNr\exnrfont
+\let\exsizeSmall\glossfont
+
+
+% ---------------------------------------------------------------
+% only internal stuff below this line:
+
+% -------------------
+
+% define internal commands relative to these new font specifications
+\def\ex{\@ifnextchar [{\exnrfont\@ex}{\item\exfont}}
+\def\@ex[#1]#2{\item\@exj[#1]{\exfont#2}}
+
+\def\@exjbg#1{\begin{list}{{\exnrfont#1}}{\@subex{\@jwidth}{.5ex}}\item\exfont}
+\def\exi#1{\item[{\exnrfont#1}]\@ifnextchar [{\exnrfont\@exj}{}}
+
+\renewcommand\trans{\nopagebreak\vskip.25\baselineskip\transfont\parindent0ex}
+% Note that we have also set parindent to 0 in our redefinition of \trans
+
+\renewcommand{\eachwordone}{\exfont}
+\renewcommand{\eachwordtwo}{\glossfont}
+\renewcommand{\eachwordthree}{\glossfont} % same font for both gloss lines
+
+% make examples in footnotes smaller:
+\let\beforeExFootnote\footnote
+\renewcommand{\footnote}[1]{\begingroup%
+\let\exfont\fnexfont%
+\let\glossfont\fnglossfont%
+\let\transfont\fntransfont%
+\let\exnrfont\fnexnrfont%
+\renewcommand{\@@xsi}{\let\@xsi\roman}% set example numbering to roman
+\beforeExFootnote{#1}%
+\endgroup}
+
+% -------------------
+
+% reduce space before labels
+% 1ex instead of 1em
+\def\@exe[#1]{\ifnum \@xnumdepth >0%
+                 \if@xrec\@exrecwarn\fi%
+                 \if@noftnote\@exrecwarn\fi%
+                 \@xnumdepth0\@listdepth0\@xrectrue%
+                 \save@counters%
+              \fi%
+                 \advance\@xnumdepth \@ne \@@xsi%
+                 \begin{list}{{\exnrfont(\thexnumi)}}%
+                             {\usecounter{xnumi}\@subex{#1}{1ex}%
+                              \if@noftnote%
+                                 \setcounter{xnumi}{\value{exx}}%
+                              \else%
+                                 \setcounter{xnumi}{\value{fnx}}%
+                              \fi}}
+
+% 1ex instead of 1.5ex
+\def\@xlist#1[#2]{\ifnum \@xnumdepth >3 \@toodeep\else%
+    \advance\@xnumdepth \@ne%
+    \edef\@xnumctr{xnum\romannumeral\the\@xnumdepth}%
+    \def\@bla{#1}
+    \ifx\@bla\empty\xs@default{\romannumeral\the\@xnumdepth}\else%
+      \expandafter\let\csname @xs\romannumeral\the\@xnumdepth\endcsname#1\fi
+    \begin{list}{{\exnrfont\csname the\@xnumctr\endcsname.}}%
+                {\usecounter{\@xnumctr}\@subex{#2}{1ex}}\fi}
+
+
+% -------------------
+
+% fix definition of _ and ^ from gb4e (which does not work properly)
+% changed back from ensuremath to \mbox{$ so that it's compatible with old latex
+%\def_#1{\mbox{$\sb{#1}$}}
+%\def^#1{\mbox{$\sp{#1}$}}
+

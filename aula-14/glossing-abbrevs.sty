@@ -1,0 +1,75 @@
+% The following commands use exsizeSmall size which we define in gb4e+.sty 
+% and reset above, which is useful since exsizeSmall is changed to a 
+% smaller font in footnotes.
+
+% nominale Argumente
+\newcommand{\N}[3]{#1$^{#3^{#2}}\!$}
+
+% index and status
+\newcommand{\V}[3]{\wordindex{#1}$^{#2}\!${\textrm{\exsizeSmall(#3)}}}
+
+% index, status, and governed status
+\newcommand{\VG}[4]{\wordindex{#1}$^{#2}\!${\textrm{\exsizeSmall(#3$_{#4}$)}}}
+
+% only status
+\newcommand{\W}[2]{\wordindex{#1}{\textrm{\exsizeSmall(#2)}}}
+
+% nur Rangindex
+\newcommand{\R}[2]{\wordindex{#1}$^{#2}\!$}
+
+% to add verbs typeset in this way to an index, redefine wordindex
+\newcommand{\wordindex}[1]{#1}
+
+% In glossings
+
+\newcommand{\acc}{\textup{\textsc{a}}}
+\newcommand{\dat}{\textup{\textsc{d}}}
+\newcommand{\nom}{\textup{\textsc{n}}}
+\newcommand{\particle}{\textup{\textsc{part}}}
+\newcommand{\sing}{\textup{\textsc{sg}}}
+\newcommand{\plur}{\textup{\textsc{pl}}}
+
+\newcommand{\first}{\textup{\scriptsize 1.}}
+\newcommand{\second}{\textup{\scriptsize 2.}}
+\newcommand{\third}{\textup{\scriptsize 3.}}
+
+\newcommand{\partII}{\textup{\textsc{part2}}}
+\newcommand{\ipp}{\textup{\textsc{ipp}}}
+
+\newcommand{\indic}{\textup{\textsc{im}}}
+\newcommand{\konj}{\textup{\textsc{sm}}}
+%\newcommand{\konjI}{\konj\ensuremath{_1}}
+%\newcommand{\konjII}{\konj\ensuremath{_2}}
+
+% for an alternative bar which is not italics
+\newcommand{\alt}{\textup{/}}
+
+% the macros with \X are like the varieties without, but start the annotation
+
+\newcommand{\extra}{-}
+\newcommand{\xacc}{\extra\acc}
+\newcommand{\xdat}{\extra\dat}
+\newcommand{\xnom}{\extra\nom}
+
+\newcommand{\xplur}{\extra\plur}
+\newcommand{\xsing}{\extra\sing}
+
+\newcommand{\xfirst}{\extra\first}
+\newcommand{\xsecond}{\extra\second}
+\newcommand{\xthird}{\extra\third}
+
+\newcommand{\xpartII}{\extra\partII}
+\newcommand{\xipp}{\extra\ipp}
+
+\newcommand{\xindic}{\extra\indic}
+\newcommand{\xkonj}{\extra\konj}
+%\newcommand{\xkonjI}{\extra\konjI}
+%\newcommand{\xkonjII}{\extra\konjII}
+
+\newcommand\denntrans{well}
+\newcommand\wohltrans{well}
+\newcommand\self{\textsc{refl}}
+
+% [...] in citations
+\newcommand{\citedots}{\mbox{\textrm{\small[\hspace*{-.2em}\ldots\hspace*{-.3em}]}}}
+

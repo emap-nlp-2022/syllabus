@@ -104,13 +104,20 @@
 
 - análise sintática, parsing
 - capitulos 12, 13 e 14
+
+* aula 14 <2022-09-27 Tue>
+
+- recaptulando
+- discussão projetos assignment 03
+
   
 * Referencias
 
   - https://www.nltk.org/book/
   - https://web.stanford.edu/~jurafsky/slp3/
   - https://nlp.stanford.edu/IR-book/
-    
+
+  - https://www.amazon.com/Natural-Language-Understanding-James-Allen/dp/0805303340
   - https://www.morganclaypool.com/doi/abs/10.2200/S00493ED1V01Y201303HLT020
   - https://www.morganclaypool.com/doi/abs/10.2200/S00935ED1V02Y201907HLT043
   - https://press.uchicago.edu/ucp/books/book/distributed/F/bo3613750.html
