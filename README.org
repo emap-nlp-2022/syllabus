@@ -110,6 +110,18 @@
 - recaptulando
 - discussão projetos assignment 03
 
+* aula 15 <2022-10-04 Tue>
+
+- terminaremos apresentação de análise sintática
+- corpus
+- parsing dependencias (estatistico)
+- CFG parsing
+
+* aula 16 <2022-10-06 Thu>
+
+- top/down parsing
+- chat parsing
+
   
 * Referencias
 

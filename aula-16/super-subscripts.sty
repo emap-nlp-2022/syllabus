@@ -1,0 +1,11 @@
+% super_subscripts.sty
+%
+% This is part of the standard gb4e.sty, but I took it out there since
+% it causes too many incompatibilities. So it can be loaded separately
+% if one wants to use it.
+
+% this allows _ to be used in horizontal mode (from J.Frampton):
+\catcode`_=\active
+\def_#1{\ifmmode\mathit{\sb{#1}}\else${}\sb{#1}$\fi}
+\catcode`^=\active
+\def^#1{\ifmmode\mathit{\sp{#1}}\else${}\sp{#1}$\fi}
