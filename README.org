@@ -122,6 +122,14 @@
 - top/down parsing
 - chat parsing
 
+* aula 17 <2022-10-11 Tue>
+
+- introdução à semântica
+
+* aula 18 <2022-10-13 Thu>
+
+- cont. semântica
+
   
 * Referencias
 
