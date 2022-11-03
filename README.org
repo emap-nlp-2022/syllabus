@@ -130,7 +130,34 @@
 
 - cont. semântica
 
-  
+* aula 19 <2022-10-18 Tue>
+
+- cont. semântica
+- [[https://courses.cs.washington.edu/courses/cse590d/03sp/tarski/tarski.html][tarski world]] 
+- https://www.youtube.com/watch?v=gyKf-nmPDO8&t=2326s
+- https://yoavartzi.com/tutorial/
+
+* aula 20 <2022-10-20 Thu>
+
+- cont. semântica formal, formas lógicas a partir de sentenças
+
+* aula 21 <2022-10-25 Tue>
+
+- cont. semântica formal
+- iniciando semântica lexical
+
+* aula 22 <2022-10-27 Thu>
+
+- cont. semantica lexical
+- Wordnet
+
+* aula 23 <2022-11-01 Tue>
+
+- cont. semantica lexical
+- Wordnet
+
+
+
 * Referencias
 
   - https://www.nltk.org/book/
@@ -143,6 +170,7 @@
   - https://press.uchicago.edu/ucp/books/book/distributed/F/bo3613750.html
   - https://staff.fnwi.uva.nl/d.j.n.vaneijck2/cs/
   - https://olzama.github.io/CL-seminar/annotated_bib.html
+  - http://www.grammaticalframework.org
 
 * Courses
 

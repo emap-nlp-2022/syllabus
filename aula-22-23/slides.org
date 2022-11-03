@@ -1,0 +1,154 @@
+#+title: sumário aula
+
+* Semântica Lexical (Lexical Semantics)
+
+- https://en.wikipedia.org/wiki/Lexical_semantics
+- Capítulo 18 de https://web.stanford.edu/~jurafsky/slp3/
+
+- Como atribuir significado à palavras?
+- palavras versus conceitos
+- ambiguidade, polisemia, relações semânticas
+- Wordnet
+- WSD
+
+* Definindo 'sentido'
+
+- gloss, texto informal
+- https://academic.oup.com/edited-volume/34561/chapter-abstract/293267879?redirectedFrom=fulltext
+
+  "Should lexicographers abandon the unachievable dream of defining
+  word meaning in terms of necessary and sufficient conditions, and
+  look instead at the facts of words in use?"
+
+- The recommended best practice for creating definitions along the
+  lines described earlier is to use the Aristotelian form: 
+
+   S = def. a G that Ds
+
+   onde G (for: genus) é parente imediato de S (for: species) na
+  ontologia. D é differentia, D nos diz o que diferencia S de G.
+
+  “human”: human = def. an animal that is rational
+
+  Arp, Robert; Smith, Barry; Spear, Andrew D.. Building Ontologies
+  with Basic Formal Ontology (The MIT Press) (p. 69). The MIT
+  Press. Kindle Edition.
+
+- alternativa adotada por thesauri (plural de thesaurus), definir
+  sentido via relações com outros sentidos.
+
+
+* polisemia
+
+- quantos sentidos uma palavra pode ter?
+- como testar diferenciação de sentidos, ex 'serve' do SLP3
+
+* relações semânticas
+
+- synonym
+
+  The notion of synonymy used in WordNet does not entail
+  interchangeability in all contexts; by that criterion, rion, natural
+  languages have few synonyms. The more modest claim is that WordNet
+  synonyms can be interchanged in some contexts. To be careful,
+  therefore, one should speak of synonymy relative to a context, but
+  in order to facilitate the discussion this qualification will
+  usually be presupposed, not asserted.
+
+  Christiane Fellbaum. WordNet: An Electronic Lexical Database (Kindle
+  Locations 399-402). Kindle Edition.
+  
+- antonym
+
+  The importance tance of antonymy first became obvious from results
+  obtained with word association test: when the probe is a familiar
+  adjective, the response commonly given by adult speakers is its
+  antonym. For example, to the probe good, the common response is bad;
+  to bad, the most frequent response sponse is good.
+
+  The first question caused serious problems for WordNet, which was
+  initially conceived as using labeled pointers between synsets in
+  order to represent semantic relations between lexical concepts. But
+  it is not appropriate priate to introduce antonymy by labeled
+  pointers between the synsets, for example, between {heavy, weighty,
+  ponderous} and {light, weightless, airy}. People who know English
+  judge heavyllight to be antonyms, and perhaps weighty/weightless,
+  but they pause and are puzzled when asked whether heavy/weightless
+  or ponderouslairy are antonyms. The concepts are opposed, posed, but
+  the word forms are not familiar antonym pairs. Antonymy, like
+  synonymy, is a semantic relation between word forms.
+
+  Christiane Fellbaum. WordNet: An Electronic Lexical Database (Kindle
+  Locations 712-714). Kindle Edition.
+
+
+- relações taxonômicas
+
+  - hyponym
+  - hypernym, entailment ∀x A(x) ⇒ B(x)
+  - meronymy, part-whole
+  - structured polysemy, BUILDING ↔ ORGANIZATION para 'bank'
+  - metonymy
+     - White House como administração e não o lugar.
+     - Brasil perdeu da Alemanhã
+
+* Wordnet
+
+- Projeto de Princeton
+- Global Wordnet Association e Wordnets no Mundo
+- glosses e synsets
+- supersenses (lexicography files, domains)
+- relations
+
+* Wordsense Disambiguation
+
+- lexical sample vs all-words
+
+- semantic concordance corpus
+  - datasets: SemCor, Wordnet Glosses
+  - shared-tasks
+  - Wikipedia
+    
+- WSD é geralmente avaliado de forma intrinsica, F1 score
+
+- baseline, most frequent sense (MFS). De onde? Como fazer no
+  Português e em outras linguas?
+
+- outras heuristicas "one sense per discourse" e "one sense per
+  collocation"
+  
+  - https://dl.acm.org/doi/10.3115/1075527.1075579
+  - https://dl.acm.org/doi/10.3115/1075671.1075731
+
+- knowledge-based algorithms
+
+  - Lesk https://en.wikipedia.org/wiki/Lesk_algorithm
+  - UKB https://ixa2.si.ehu.eus/ukb/
+
+- supervisionado
+
+  - Word Embeeding vs Contextual Embeddings
+
+- não supervisionado
+
+  - Sense induction, clustering de word embeedings    
+  - Onto.PT http://ontopt.dei.uc.pt/index.php?sec=projecto
+
+
+* Bibliotecas
+
+- https://github.com/goodmami/wn
+- https://www.nltk.org/howto/wsd.html
+- https://github.com/alvations/pywsd
+- https://nlp.lsi.upc.edu/freeling/node/1   
+- https://ixa2.si.ehu.eus/ukb/
+- https://github.com/letuananh/intsem.fx
+
+* Demo
+
+Demo
+
+* Reading
+
+- https://dr.ntu.edu.sg/handle/10220/49370
+  
